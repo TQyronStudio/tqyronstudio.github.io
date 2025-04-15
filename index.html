@@ -4,12 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>T-Qyron Studio</title>
-  <!-- Propojení s externím CSS souborem -->
+  <!-- Připojení externího CSS souboru, pokud ho používáš -->
   <link rel="stylesheet" href="css/styles.css">
-  <!-- Doplňkový inline styl pro hero sekci a základní sekce -->
+  <!-- Inline styly pro rychlé nastavení modro-fialového tématu -->
   <style>
+    /* Základní nastavení těla stránky */
+    body {
+      font-family: Arial, sans-serif;
+      color: #dcd6f7;        /* Světle levandulová barva textu */
+      background: #1f1f2e;   /* Tmavě modrofialové pozadí */
+      line-height: 1.6;
+    }
+    /* HERO sekce s logem */
     .hero {
-      position: relative;
       text-align: center;
       margin: 0;
       padding: 0;
@@ -17,37 +24,43 @@
     .hero img {
       width: 100%;
       max-height: 500px;
-      object-fit: cover;
+      object-fit: cover;  /* Obrázek se roztáhne bez deformací */
       display: block;
     }
-    /* Sekce */
+    /* Sekce o nás a kontakt */
     section {
       padding: 2rem 1rem;
       text-align: center;
-      color: #fff;
-      background: #1c1c1c;
+      background: #2a2a45;  /* Světlejší modrofialové pozadí */
     }
-    /* Kontakt */
+    /* Nadpisy s modrofialovou barvou */
+    h1, h2, h3 {
+      color: #9b59b6;   /* Světlá fialová barva pro nadpisy */
+    }
+    /* Kontakt – barvy odkazů */
     #contact a {
-      color: #f0c040;
+      color: #8e44ad;   /* Trochu sytá fialová pro odkazy */
       text-decoration: none;
+    }
+    #contact a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
-  <!-- HERO sekce s velkým logem -->
+  <!-- HERO sekce: velké logo na celou šířku -->
   <header class="hero">
     <img src="images/T-Qyron_Studio_1792x1024.webp" alt="T-Qyron Studio Logo">
   </header>
 
-  <!-- Sekce o nás -->
+  <!-- Sekce "About" s textem o vývoji -->
   <section id="about">
     <h1>Building smart &amp; engaging apps that make a difference.</h1>
     <h2>Crafted with precision at T-Qyron Studio.</h2>
   </section>
 
-  <!-- Kontakt -->
+  <!-- Kontaktní sekce -->
   <section id="contact">
     <h3>Contact</h3>
     <p>Email: <a href="mailto:tqyron.studio@gmail.com">tqyron.studio@gmail.com</a></p>
@@ -55,3 +68,4 @@
 
 </body>
 </html>
+
