@@ -4,63 +4,96 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>T-Qyron Studio</title>
-  <!-- Připojení externího CSS souboru, pokud ho používáš -->
   <link rel="stylesheet" href="css/styles.css">
-  <!-- Inline styly pro rychlé nastavení modro-fialového tématu -->
   <style>
-    /* Základní nastavení těla stránky */
+    /* Globální styl */
     body {
-      font-family: Arial, sans-serif;
-      color: #dcd6f7;        /* Světle levandulová barva textu */
-      background: #1f1f2e;   /* Tmavě modrofialové pozadí */
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #e0e0ff;
+      background: linear-gradient(145deg, #0f0f1a, #1a1a2e);
+      background-attachment: fixed;
       line-height: 1.6;
     }
-    /* HERO sekce s logem */
+
+    /* Logo sekce */
     .hero {
       text-align: center;
       margin: 0;
       padding: 0;
+      background-color: #000000;
     }
+
     .hero img {
       width: 100%;
       max-height: 500px;
-      object-fit: cover;  /* Obrázek se roztáhne bez deformací */
+      object-fit: cover;
       display: block;
+      box-shadow: 0 0 40px rgba(144, 19, 254, 0.5); /* fialový zářivý okraj */
     }
-    /* Sekce o nás a kontakt */
+
+    /* Sekce */
     section {
-      padding: 2rem 1rem;
+      padding: 4rem 1rem;
       text-align: center;
-      background: #2a2a45;  /* Světlejší modrofialové pozadí */
     }
-    /* Nadpisy s modrofialovou barvou */
+
+    /* Nadpisy – neon styl */
     h1, h2, h3 {
-      color: #9b59b6;   /* Světlá fialová barva pro nadpisy */
+      color: #b388ff;
+      text-shadow: 0 0 8px #b388ff;
+      margin-bottom: 1.5rem;
     }
-    /* Kontakt – barvy odkazů */
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #c9a3ff;
+      text-shadow: 0 0 5px #9f6bff;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: #80aaff;
+      text-shadow: 0 0 5px #5588ff;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #d0d0ff;
+    }
+
+    /* Kontakt */
     #contact a {
-      color: #8e44ad;   /* Trochu sytá fialová pro odkazy */
+      color: #77ddff;
       text-decoration: none;
+      font-weight: bold;
+      text-shadow: 0 0 5px #77ddff;
     }
+
     #contact a:hover {
-      text-decoration: underline;
+      color: #ffffff;
+      text-shadow: 0 0 10px #ffffff;
     }
   </style>
 </head>
 <body>
 
-  <!-- HERO sekce: velké logo na celou šířku -->
+  <!-- Logo (hero sekce) -->
   <header class="hero">
     <img src="images/T-Qyron_Studio_1792x1024.webp" alt="T-Qyron Studio Logo">
   </header>
 
-  <!-- Sekce "About" s textem o vývoji -->
+  <!-- Sekce o nás -->
   <section id="about">
     <h1>Building smart &amp; engaging apps that make a difference.</h1>
     <h2>Crafted with precision at T-Qyron Studio.</h2>
   </section>
 
-  <!-- Kontaktní sekce -->
+  <!-- Kontakt -->
   <section id="contact">
     <h3>Contact</h3>
     <p>Email: <a href="mailto:tqyron.studio@gmail.com">tqyron.studio@gmail.com</a></p>
@@ -68,4 +101,3 @@
 
 </body>
 </html>
-
