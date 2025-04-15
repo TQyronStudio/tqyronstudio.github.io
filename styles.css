@@ -1,0 +1,104 @@
+/* Reset základních stylů */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Tělo stránky */
+body {
+  font-family: 'Arial', sans-serif;
+  color: #fff;
+  background: #1c1c1c;
+  line-height: 1.6;
+}
+
+/* Hlavička a navigační menu */
+header {
+  background: #282828;
+  padding: 1rem;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  max-height: 50px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links li a {
+  color: #ddd;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #fff;
+}
+
+/* Hero sekce */
+.hero {
+  text-align: center;
+  padding: 4rem 1rem;
+  background: #222;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+/* Sekce obsahu (About, Projects, Contact) */
+section {
+  padding: 3rem 1rem;
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+}
+
+section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  color: #f0c040; /* Accent barva */
+}
+
+section p {
+  margin-bottom: 1rem;
+}
+
+/* Odkazy v kontaktech */
+.contact a {
+  color: #f0c040;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contact a:hover {
+  text-decoration: underline;
+}
+
+/* Patička */
+footer {
+  text-align: center;
+  background: #282828;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #aaa;
+}
