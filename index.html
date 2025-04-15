@@ -1,104 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>T-Qyron Studio</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <style>
-    /* Globální styl */
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #e0e0ff;
-      background: linear-gradient(145deg, #0f0f1a, #1a1a2e);
-      background-attachment: fixed;
-      line-height: 1.6;
-    }
+<html lang="cs">  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-Qyron Studio</title>
+    <style>
+        /* Globální styl */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e0e0ff;
+            /* Tmavší a sytější gradient */
+            background: linear-gradient(145deg, #0a0a14, #141422);
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
 
-    /* Logo sekce */
-    .hero {
-      text-align: center;
-      margin: 0;
-      padding: 0;
-      background-color: #000000;
-    }
+        /* Kontejner pro centrování obsahu sekcí */
+        .content-wrapper {
+            max-width: 900px; /* Maximální šířka obsahu */
+            margin: 0 auto; /* Centrování na stránce */
+            padding: 0 1rem; /* Postranní odsazení */
+        }
 
-    .hero img {
-      width: 100%;
-      max-height: 500px;
-      object-fit: cover;
-      display: block;
-      box-shadow: 0 0 20px rgba(144, 19, 254, 0.3); /* Jemnější záře okolo loga */
-    }
+        /* Logo sekce (Hero) */
+        .hero {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            /* Černé pozadí může zůstat, nebo ho můžeme odstranit, aby prosvítal gradient */
+            /* background-color: #000000; */
+            /* Přidání jemného přechodu pro plynulejší napojení na gradient */
+            position: relative; /* Nutné pro pseudo-element */
+        }
+        .hero::after { /* Přechod do ztracena pod logem */
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px; /* Výška přechodu */
+            background: linear-gradient(to bottom, rgba(20, 20, 34, 0), #141422); /* Barva musí odpovídat spodní barvě gradientu body */
+            pointer-events: none; /* Aby neblokoval interakci */
+        }
 
-    /* Sekce */
-    section {
-      padding: 4rem 1rem;
-      text-align: center;
-    }
 
-    /* Nadpisy – jemnější neon efekt */
-    h1, h2, h3 {
-      color: #c5a3ff;
-      text-shadow: 0 0 3px rgba(200, 150, 255, 0.3);
-      margin-bottom: 1.5rem;
-    }
+        .hero img {
+            width: 100%;
+            max-height: 450px; /* Trochu snížíme, pokud je moc velké */
+            object-fit: cover;
+            display: block;
+            /* Jemnější a více rozptýlená záře */
+            box-shadow: 0 0 25px 5px rgba(160, 80, 255, 0.2);
+            border-bottom: 1px solid rgba(160, 80, 255, 0.3); /* Tenká linka pod logem */
+        }
 
-    h1 {
-      font-size: 2.5rem;
-    }
+        /* Sekce */
+        section {
+            /* Použijeme wrapper pro centrování a padding */
+            padding: 4rem 0; /* Vertikální padding zůstává, horizontální řeší wrapper */
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Jemný oddělovač mezi sekcemi */
+        }
+        section:last-child {
+             border-bottom: none; /* Poslední sekce nemá spodní border */
+        }
 
-    h2 {
-      font-size: 1.5rem;
-      color: #d3bfff;
-      text-shadow: 0 0 2px rgba(180, 130, 255, 0.3);
-    }
+        /* Vylepšené nadpisy s výraznějším neon efektem */
+        h1, h2, h3 {
+            color: #e0e0ff; /* Základní světlá barva */
+            margin-bottom: 1.5rem;
+            font-weight: 600; /* Trochu tučnější */
+        }
 
-    h3 {
-      font-size: 1.3rem;
-      color: #99bbff;
-      text-shadow: 0 0 2px rgba(120, 160, 255, 0.2);
-    }
+        h1 {
+            font-size: 2.8rem; /* O něco větší */
+            color: #d8bfff; /* Světlejší fialová */
+            /* Vrstvený neonový stín */
+            text-shadow:
+                0 0 5px rgba(216, 191, 255, 0.4),
+                0 0 10px rgba(216, 191, 255, 0.3),
+                0 0 15px rgba(197, 163, 255, 0.2);
+        }
 
-    p {
-      font-size: 1.1rem;
-      color: #dcdcff;
-    }
+        h2 {
+            font-size: 1.8rem; /* Větší */
+            color: #c5a3ff;
+            font-weight: 400; /* Normální váha pro kontrast */
+            text-shadow:
+                0 0 4px rgba(197, 163, 255, 0.3),
+                0 0 8px rgba(197, 163, 255, 0.2);
+        }
 
-    /* Kontakt */
-    #contact a {
-      color: #77ddff;
-      text-decoration: none;
-      font-weight: bold;
-      text-shadow: 0 0 2px rgba(119, 221, 255, 0.3);
-    }
+        h3 {
+            font-size: 1.5rem; /* Větší */
+            color: #99bbff; /* Modrý nádech */
+            text-shadow:
+                0 0 3px rgba(153, 187, 255, 0.4),
+                0 0 6px rgba(153, 187, 255, 0.2);
+        }
 
-    #contact a:hover {
-      color: #ffffff;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
-    }
-  </style>
+        p {
+            font-size: 1.1rem;
+            color: #c0c0e0; /* Trochu světlejší pro lepší čitelnost */
+            max-width: 700px; /* Omezit šířku odstavců v sekcích pro lepší čitelnost */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Kontakt - vylepšený odkaz */
+        #contact a {
+            color: #77ddff; /* Jasná modrá */
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.2em 0.4em; /* Malé odsazení okolo odkazu */
+            border-radius: 4px; /* Zaoblené rohy */
+            transition: color 0.3s ease, background-color 0.3s ease, text-shadow 0.3s ease; /* Plynulý přechod */
+            text-shadow:
+                0 0 3px rgba(119, 221, 255, 0.5),
+                0 0 6px rgba(119, 221, 255, 0.3);
+        }
+
+        #contact a:hover {
+            color: #ffffff;
+            background-color: rgba(119, 221, 255, 0.15); /* Lehké pozadí při najetí */
+            text-shadow:
+                0 0 5px rgba(255, 255, 255, 0.6),
+                0 0 10px rgba(119, 221, 255, 0.4); /* Intenzivnější záře */
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Logo (hero sekce) -->
-  <header class="hero">
-    <img src="images/T-Qyron_Studio_1792x1024.webp" alt="T-Qyron Studio Logo">
-  </header>
+    <header class="hero">
+        <img src="images/T-Qyron_Studio_1792x1024.webp" alt="T-Qyron Studio Logo">
+    </header>
 
-  <!-- Sekce o nás -->
-  <section id="about">
-    <h1>Building smart &amp; engaging apps that make a difference.</h1>
-    <h2>Crafted with precision at T-Qyron Studio.</h2>
-  </section>
+    <section id="about">
+        <div class="content-wrapper">
+            <h1>Building smart &amp; engaging apps that make a difference.</h1>
+            <h2>Crafted with precision at T-Qyron Studio.</h2>
+        </div>
+    </section>
 
-  <!-- Kontakt -->
-  <section id="contact">
-    <h3>Contact</h3>
-    <p>Email: <a href="mailto:tqyron.studio@gmail.com">tqyron.studio@gmail.com</a></p>
-  </section>
+    <section id="contact">
+        <div class="content-wrapper">
+            <h3>Contact</h3>
+            <p>Email: <a href="mailto:tqyron.studio@gmail.com">tqyron.studio@gmail.com</a></p>
+        </div>
+    </section>
 
 </body>
 </html>
-
