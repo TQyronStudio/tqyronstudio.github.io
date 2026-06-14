@@ -1,167 +1,493 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T-Qyron Studio</title>
-    <style>
-        /* Globální styl */
-        /* ----- NOVÝ STYL PRO BODY S ANIMACÍ ----- */
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #e0e0ff;
-            line-height: 1.6;
-            /* Širší gradient s více barvami pro plynulejší animaci */
-            background: linear-gradient(135deg, #0a0a14, #1e1e3f, #3a2a5f, #141422); /* Můžeš si pohrát s barvami */
-            background-size: 400% 400%; /* Větší velikost pozadí, aby bylo kam posouvat */
-            /* Připojení animace */
-            animation: gradientShift 15s ease infinite; /* Název animace, doba trvání, funkce a opakování */
-        }
-        /* ----------------------------------------- */
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>T-Qyron Studio — Smart &amp; engaging mobile apps</title>
+  <meta name="description" content="T-Qyron Studio is an indie mobile app studio crafting smart, engaging and beautifully polished apps." />
 
-        /* Kontejner pro centrování obsahu sekcí */
-        .content-wrapper {
-            max-width: 900px; /* Maximální šířka obsahu */
-            margin: 0 auto; /* Centrování na stránce */
-            padding: 0 1rem; /* Postranní odsazení */
-        }
+  <!-- Open Graph (náhled při sdílení) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="T-Qyron Studio" />
+  <meta property="og:description" content="Building smart & engaging apps that make a difference." />
+  <meta property="og:url" content="https://tqyronstudio.github.io/" />
+  <meta property="og:image" content="https://tqyronstudio.github.io/images/T-Qyron_Studio_1792x1024.webp" />
+  <meta name="theme-color" content="#05060f" />
 
-        /* Logo sekce (Hero) */
-        .hero {
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            position: relative; /* Nutné pro pseudo-element */
-        }
-        .hero::after { /* Přechod do ztracena pod logem */
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50px; /* Výška přechodu */
-            background: linear-gradient(to bottom, rgba(20, 20, 34, 0), #141422); /* Barva musí odpovídat spodní barvě gradientu body */
-            pointer-events: none; /* Aby neblokoval interakci */
-        }
+  <!-- Favicon (zářivý diamant) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 30 16 16 30 2 16Z' fill='%2336a8ff'/%3E%3Cpath d='M16 6 26 16 16 26 6 16Z' fill='%239a6bff'/%3E%3C/svg%3E" />
 
+  <!-- Fonty -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
-        .hero img {
-            width: 100%;
-            max-height: 450px;
-            object-fit: cover;
-            display: block;
-            box-shadow: 0 0 25px 5px rgba(160, 80, 255, 0.2);
-            border-bottom: 1px solid rgba(160, 80, 255, 0.3);
-        }
+  <style>
+    /* ===================== PROMĚNNÉ / PALETA ===================== */
+    :root{
+      --bg-0:#04050d;
+      --bg-1:#0a0b1e;
+      --ink:#eef1ff;
+      --muted:#99a3d4;
+      --blue:#36a8ff;
+      --cyan:#67f0ff;
+      --violet:#9a6bff;
+      --magenta:#e85bff;
+      --line:rgba(120,150,255,.12);
+      --card:rgba(20,24,54,.45);
+      --card-bd:rgba(130,160,255,.18);
+      --glow:0 0 30px rgba(54,168,255,.35);
+      --maxw:1140px;
+    }
 
-        /* Sekce */
-        section {
-            padding: 4rem 0;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        section:last-child {
-             border-bottom: none;
-        }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
 
-        /* Vylepšené nadpisy s výraznějším neon efektem */
-        h1, h2, h3 {
-            color: #e0e0ff;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
+    body{
+      font-family:'Inter',system-ui,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 700px at 50% -10%, #1a1640 0%, transparent 60%),
+        radial-gradient(900px 600px at 100% 10%, #0e2350 0%, transparent 55%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-0) 60%);
+      background-attachment:fixed;
+      min-height:100vh;
+      overflow-x:hidden;
+      line-height:1.6;
+    }
 
-        h1 {
-            font-size: 2.8rem;
-            color: #d8bfff;
-            text-shadow:
-                0 0 5px rgba(216, 191, 255, 0.4),
-                0 0 10px rgba(216, 191, 255, 0.3),
-                0 0 15px rgba(197, 163, 255, 0.2);
-        }
+    /* ===================== DEKORATIVNÍ POZADÍ ===================== */
+    #bg{position:fixed;inset:0;z-index:-3;pointer-events:none}
 
-        h2 {
-            font-size: 1.8rem;
-            color: #c5a3ff;
-            font-weight: 400;
-            text-shadow:
-                0 0 4px rgba(197, 163, 255, 0.3),
-                0 0 8px rgba(197, 163, 255, 0.2);
-        }
+    .grid-floor{
+      position:fixed;left:50%;bottom:-12vh;z-index:-2;
+      width:240vw;height:120vh;transform:translateX(-50%) rotateX(76deg);
+      transform-origin:50% 100%;
+      background-image:
+        linear-gradient(to right, var(--line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+      background-size:64px 64px;
+      -webkit-mask-image:linear-gradient(to top,#000 0%, transparent 75%);
+      mask-image:linear-gradient(to top,#000 0%, transparent 75%);
+      opacity:.55;
+      animation:gridMove 7s linear infinite;
+    }
+    @keyframes gridMove{from{background-position:0 0}to{background-position:0 64px}}
 
-        h3 {
-            font-size: 1.5rem;
-            color: #99bbff;
-            text-shadow:
-                0 0 3px rgba(153, 187, 255, 0.4),
-                0 0 6px rgba(153, 187, 255, 0.2);
-        }
+    .orb{position:fixed;border-radius:50%;filter:blur(60px);z-index:-1;opacity:.45;pointer-events:none}
+    .orb.b1{width:420px;height:420px;top:-80px;left:-120px;background:radial-gradient(circle,var(--blue),transparent 70%);animation:float 14s ease-in-out infinite}
+    .orb.b2{width:360px;height:360px;top:40%;right:-120px;background:radial-gradient(circle,var(--violet),transparent 70%);animation:float 18s ease-in-out infinite reverse}
+    .orb.b3{width:300px;height:300px;bottom:-60px;left:30%;background:radial-gradient(circle,var(--magenta),transparent 70%);opacity:.28;animation:float 16s ease-in-out infinite}
+    @keyframes float{0%,100%{transform:translateY(0) translateX(0)}50%{transform:translateY(-40px) translateX(20px)}}
 
-        p {
-            font-size: 1.1rem;
-            color: #c0c0e0;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    /* ===================== NAVIGACE ===================== */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:50;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:18px clamp(18px,5vw,48px);
+      transition:background .35s ease, backdrop-filter .35s ease, padding .35s ease, border-color .35s ease;
+      border-bottom:1px solid transparent;
+    }
+    nav.scrolled{
+      background:rgba(6,8,20,.72);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+      padding:12px clamp(18px,5vw,48px);
+    }
+    .brand{
+      font-family:'Orbitron',sans-serif;font-weight:700;letter-spacing:2px;
+      font-size:1.05rem;color:#fff;text-decoration:none;display:flex;align-items:center;gap:10px;
+    }
+    .brand .dot{width:12px;height:12px;border-radius:3px;transform:rotate(45deg);
+      background:linear-gradient(135deg,var(--blue),var(--violet));box-shadow:var(--glow)}
+    .brand b{background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+    .nav-links{display:flex;gap:8px;align-items:center;list-style:none}
+    .nav-links a{
+      font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.5px;font-size:1rem;
+      color:var(--muted);text-decoration:none;padding:8px 14px;border-radius:10px;transition:.25s
+    }
+    .nav-links a:hover{color:#fff;background:rgba(120,150,255,.1)}
+    .nav-links a.cta{
+      color:#fff;border:1px solid var(--card-bd);
+      background:linear-gradient(135deg,rgba(54,168,255,.18),rgba(154,107,255,.18))
+    }
+    .nav-links a.cta:hover{box-shadow:var(--glow);border-color:var(--blue)}
 
-        /* Kontakt - vylepšený odkaz */
-        #contact a {
-            color: #77ddff;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 0.2em 0.4em;
-            border-radius: 4px;
-            transition: color 0.3s ease, background-color 0.3s ease, text-shadow 0.3s ease;
-            text-shadow:
-                0 0 3px rgba(119, 221, 255, 0.5),
-                0 0 6px rgba(119, 221, 255, 0.3);
-        }
+    /* ===================== OBECNÉ ===================== */
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(18px,5vw,32px)}
+    section{padding:clamp(70px,10vw,120px) 0;position:relative}
+    .kicker{
+      font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:4px;text-transform:uppercase;
+      font-size:.85rem;color:var(--cyan);margin-bottom:18px;
+      display:inline-flex;align-items:center;gap:10px
+    }
+    .kicker::before{content:'';width:34px;height:1px;background:linear-gradient(90deg,var(--cyan),transparent)}
+    h1,h2,h3{font-family:'Orbitron',sans-serif;line-height:1.15;letter-spacing:.5px}
 
-        #contact a:hover {
-            color: #ffffff;
-            background-color: rgba(119, 221, 255, 0.15);
-            text-shadow:
-                0 0 5px rgba(255, 255, 255, 0.6),
-                0 0 10px rgba(119, 221, 255, 0.4);
-        }
+    /* ===================== HERO ===================== */
+    .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+      align-items:center;text-align:center;padding-top:120px}
+    .scene{perspective:1000px;width:100%;margin:8px auto 38px;position:relative}
+    .scene::before{ /* jemná záře za nápisem */
+      content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+      width:115%;height:170%;z-index:-1;pointer-events:none;
+      background:radial-gradient(ellipse at center, rgba(80,130,255,.20), transparent 62%)
+    }
+    .logo-mark{
+      display:inline-flex;flex-direction:column;align-items:center;gap:12px;margin:0;
+      transform-style:preserve-3d;transition:transform .25s ease;will-change:transform;user-select:none
+    }
+    .lm-top{
+      font-family:'Orbitron',sans-serif;font-weight:900;line-height:.95;letter-spacing:.04em;
+      font-size:clamp(2.6rem,11vw,7rem);
+      background:linear-gradient(180deg,#ffffff 0%,#bfe0ff 45%,#7fb6ff 70%,#9a6bff 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      filter:drop-shadow(0 0 18px rgba(80,150,255,.55)) drop-shadow(0 0 42px rgba(120,90,255,.35))
+    }
+    .lm-top i{font-style:normal;-webkit-text-fill-color:var(--cyan);color:var(--cyan);
+      filter:drop-shadow(0 0 14px rgba(103,240,255,.85))}
+    .lm-line{
+      width:min(82%,520px);height:2px;border-radius:2px;
+      background:linear-gradient(90deg,transparent,var(--cyan),var(--violet),transparent);
+      box-shadow:0 0 14px rgba(103,240,255,.7);animation:pulseLine 3s ease-in-out infinite
+    }
+    @keyframes pulseLine{0%,100%{opacity:.5}50%{opacity:1}}
+    .lm-sub{
+      font-family:'Orbitron',sans-serif;font-weight:500;color:#cfe2ff;
+      font-size:clamp(.85rem,3.4vw,1.7rem);
+      letter-spacing:clamp(.4em,2vw,1.05em);padding-left:clamp(.4em,2vw,1.05em);
+      text-shadow:0 0 12px rgba(103,240,255,.5)
+    }
+    .hero .tagline{
+      font-family:'Orbitron',sans-serif;font-weight:700;line-height:1.25;max-width:18ch;margin:6px auto 0;
+      font-size:clamp(1.15rem,3.1vw,2rem);
+      background:linear-gradient(180deg,#ffffff,#bcd0ff 60%,#9a6bff);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      text-shadow:0 0 40px rgba(120,150,255,.2)
+    }
+    .hero .sub{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:clamp(1.05rem,2.4vw,1.4rem);
+      color:var(--muted);margin:16px 0 34px;letter-spacing:.5px}
+    .btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+    .btn{
+      font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+      font-size:1rem;text-decoration:none;padding:14px 30px;border-radius:12px;cursor:pointer;
+      transition:.28s;display:inline-flex;align-items:center;gap:10px
+    }
+    .btn.primary{color:#04050d;background:linear-gradient(135deg,var(--cyan),var(--blue) 55%,var(--violet));
+      box-shadow:0 10px 30px rgba(54,168,255,.4)}
+    .btn.primary:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(120,120,255,.6)}
+    .btn.ghost{color:#fff;border:1px solid var(--card-bd);background:rgba(20,24,54,.35)}
+    .btn.ghost:hover{border-color:var(--cyan);box-shadow:var(--glow);transform:translateY(-3px)}
+    .scroll-hint{margin-top:54px;color:var(--muted);font-size:.8rem;letter-spacing:3px;
+      font-family:'Rajdhani',sans-serif;text-transform:uppercase;animation:bob 2.2s ease-in-out infinite}
+    @keyframes bob{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(8px);opacity:1}}
 
-        /* ----- DEFINICE ANIMACE PRO GRADIENT ----- */
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%; /* Startovní pozice gradientu */
-            }
-            50% {
-                background-position: 100% 50%; /* Pozice v polovině animace */
-            }
-            100% {
-                background-position: 0% 50%; /* Návrat na startovní pozici */
-            }
-        }
-        /* ----------------------------------------- */
+    /* ===================== SEKCE NADPISY ===================== */
+    .head{text-align:center;margin-bottom:60px}
+    .head h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;
+      background:linear-gradient(180deg,#fff,#9fb6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .head p{color:var(--muted);max-width:560px;margin:16px auto 0;font-size:1.05rem}
 
-    </style>
+    /* ===================== KARTY ===================== */
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .card{
+      position:relative;padding:34px 28px;border-radius:18px;
+      background:var(--card);border:1px solid var(--card-bd);
+      backdrop-filter:blur(10px);transform-style:preserve-3d;transition:transform .2s ease, box-shadow .3s ease;
+      overflow:hidden
+    }
+    .card::before{ /* gradientní okraj při hoveru */
+      content:'';position:absolute;inset:0;border-radius:18px;padding:1px;pointer-events:none;
+      background:linear-gradient(135deg,var(--cyan),transparent 40%,transparent 60%,var(--violet));
+      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .3s
+    }
+    .card:hover{box-shadow:0 24px 60px rgba(0,0,0,.5), 0 0 40px rgba(90,120,255,.25)}
+    .card:hover::before{opacity:1}
+    .icon{width:58px;height:58px;border-radius:14px;display:grid;place-items:center;margin-bottom:22px;
+      background:linear-gradient(135deg,rgba(54,168,255,.2),rgba(154,107,255,.2));border:1px solid var(--card-bd)}
+    .icon svg{width:28px;height:28px;stroke:var(--cyan);fill:none;stroke-width:1.8}
+    .card h3{font-size:1.25rem;font-weight:700;margin-bottom:12px;color:#fff}
+    .card p{color:var(--muted);font-size:1rem}
+
+    /* ===================== FLAGSHIP ===================== */
+    .flag{
+      display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center;
+      padding:48px;border-radius:24px;background:var(--card);border:1px solid var(--card-bd);
+      backdrop-filter:blur(12px);position:relative;overflow:hidden
+    }
+    .flag::after{content:'';position:absolute;width:360px;height:360px;right:-120px;top:-120px;border-radius:50%;
+      background:radial-gradient(circle,rgba(154,107,255,.35),transparent 70%);filter:blur(30px)}
+    .flag .badge{font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+      font-size:.8rem;color:var(--cyan);border:1px solid var(--card-bd);padding:6px 14px;border-radius:30px;display:inline-block;margin-bottom:18px}
+    .flag h3{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;margin-bottom:14px;
+      background:linear-gradient(120deg,#fff,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .flag p{color:var(--muted);font-size:1.08rem;margin-bottom:10px}
+    .flag .tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+    .flag .tags span{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.9rem;color:#cdd6ff;
+      padding:7px 14px;border-radius:10px;background:rgba(120,150,255,.1);border:1px solid var(--line)}
+    .flag-art{position:relative;z-index:1;display:grid;place-items:center}
+    .flag-art .app-icon{width:184px;height:184px;border-radius:42px;display:block;
+      border:1px solid var(--card-bd);
+      box-shadow:0 24px 70px rgba(0,0,0,.55), 0 0 50px rgba(80,150,255,.35);
+      animation:floatY 5s ease-in-out infinite}
+    @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+    /* ===================== KONTAKT ===================== */
+    .contact{text-align:center}
+    .contact .mail{
+      font-family:'Orbitron',sans-serif;font-size:clamp(1.3rem,3.5vw,2.2rem);font-weight:700;
+      text-decoration:none;display:inline-block;margin-top:10px;
+      background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent;
+      transition:.3s
+    }
+    .contact .mail:hover{filter:drop-shadow(0 0 18px rgba(103,240,255,.6))}
+
+    /* ===================== FOOTER ===================== */
+    footer{border-top:1px solid var(--line);padding:40px 0;margin-top:40px}
+    .foot{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+    .foot .copy{color:var(--muted);font-size:.92rem}
+    .foot-links{display:flex;gap:22px;flex-wrap:wrap}
+    .foot-links a{color:var(--muted);text-decoration:none;font-size:.92rem;transition:.25s}
+    .foot-links a:hover{color:var(--cyan)}
+
+    /* ===================== SCROLL REVEAL ===================== */
+    .reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease, transform .8s ease}
+    .reveal.in{opacity:1;transform:none}
+
+    /* ===================== RESPONSIVITA ===================== */
+    @media(max-width:860px){
+      .grid3{grid-template-columns:1fr}
+      .flag{grid-template-columns:1fr;padding:32px;text-align:center}
+      .flag-art{order:-1}
+      .flag .tags{justify-content:center}
+    }
+
+    /* ===================== REDUCED MOTION ===================== */
+    @media(prefers-reduced-motion:reduce){
+      *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+      .reveal{opacity:1;transform:none}
+    }
+  </style>
 </head>
 <body>
 
-    <header class="hero">
-        <img src="images/T-Qyron_Studio_1792x1024.webp" alt="T-Qyron Studio Logo">
-    </header>
+  <!-- Animované pozadí -->
+  <canvas id="bg"></canvas>
+  <div class="grid-floor"></div>
+  <div class="orb b1"></div>
+  <div class="orb b2"></div>
+  <div class="orb b3"></div>
 
-    <section id="about">
-        <div class="content-wrapper">
-            <h1>Building smart &amp; engaging apps that make a difference.</h1>
-            <h2>Crafted with precision at T-Qyron Studio.</h2>
+  <!-- Navigace -->
+  <nav id="nav">
+    <a href="#top" class="brand"><span class="dot"></span>T<b>-QYRON</b> STUDIO</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#flagship" class="cta">Apps</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero wrap" id="top">
+    <span class="kicker">Indie mobile app studio</span>
+    <div class="scene">
+      <h1 class="logo-mark" id="heroVisual">
+        <span class="lm-top">T<i>-</i>QYRON</span>
+        <span class="lm-line" aria-hidden="true"></span>
+        <span class="lm-sub">STUDIO</span>
+      </h1>
+    </div>
+    <p class="tagline">Building smart &amp; engaging apps that make a difference.</p>
+    <p class="sub">Crafted with precision at T-Qyron Studio.</p>
+    <div class="scroll-hint">Scroll ↓</div>
+  </header>
+
+  <!-- CRAFT -->
+  <section id="craft" class="wrap">
+    <div class="head reveal">
+      <span class="kicker">What we do</span>
+      <h2>Engineered to feel effortless</h2>
+      <p>Every app we ship blends solid engineering with design people actually enjoy using.</p>
+    </div>
+    <div class="grid3">
+      <article class="card reveal tilt">
+        <div class="icon"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></svg></div>
+        <h3>Smart by design</h3>
+        <p>Clean architecture and thoughtful logic under the hood — apps that stay fast, stable and easy to grow.</p>
+      </article>
+      <article class="card reveal tilt">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></div>
+        <h3>Engaging by default</h3>
+        <p>Gamification, motivation and delightful detail that keep people coming back, day after day.</p>
+      </article>
+      <article class="card reveal tilt">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M12 3 8 9l4 12 4-12-4-6z"/></svg></div>
+        <h3>Crafted with precision</h3>
+        <p>Every pixel, animation and interaction polished until the whole thing simply feels right.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- FLAGSHIP -->
+  <section id="flagship" class="wrap">
+    <div class="head reveal">
+      <span class="kicker">Our apps</span>
+      <h2>Flagship project</h2>
+    </div>
+    <div class="flag reveal">
+      <div class="flag-text">
+        <span class="badge">Self-improvement</span>
+        <h3>SelfRise</h3>
+        <p>A self-improvement companion that helps people build better habits, set meaningful goals and journal their wins — wrapped in a motivating, gamified experience.</p>
+        <div class="tags">
+          <span>Habits</span><span>Goals</span><span>Journal</span><span>Gamification</span>
         </div>
-    </section>
+      </div>
+      <div class="flag-art">
+        <img class="app-icon" src="images/icon.png" alt="SelfRise app icon" />
+      </div>
+    </div>
+  </section>
 
-    <section id="contact">
-        <div class="content-wrapper">
-            <h3>Contact</h3>
-            <p>Email: <a href="mailto:tqyron.studio@gmail.com">tqyron.studio@gmail.com</a></p>
-        </div>
-    </section>
+  <!-- CONTACT -->
+  <section id="contact" class="wrap contact">
+    <div class="reveal">
+      <span class="kicker" style="justify-content:center">Let's talk</span>
+      <h2 style="font-family:'Orbitron';font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700">Let's build something that matters</h2>
+      <p style="color:var(--muted);max-width:520px;margin:16px auto 0">Have an idea, a project, or just want to say hi? Drop us a line.</p>
+      <a href="mailto:tqyron.studio@gmail.com" class="mail">tqyron.studio@gmail.com</a>
+    </div>
+  </section>
 
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap foot">
+      <div class="copy">© <span id="year"></span> T-Qyron Studio. All rights reserved.</div>
+      <div class="foot-links">
+        <a href="#top">Home</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="mailto:tqyron.studio@gmail.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ---------- Rok v patičce ---------- */
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ---------- Nav po scrollu ---------- */
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+    onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+    /* ---------- Scroll reveal ---------- */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+    }, {threshold:.15});
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---------- 3D tilt: hero artwork ---------- */
+    if (!reduce){
+      const hero = document.querySelector('.hero');
+      const visual = document.getElementById('heroVisual');
+      hero.addEventListener('mousemove', (e) => {
+        const r = hero.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - .5;
+        const y = (e.clientY - r.top) / r.height - .5;
+        visual.style.transform = `rotateY(${x*10}deg) rotateX(${-y*10}deg)`;
+      });
+      hero.addEventListener('mouseleave', () => visual.style.transform = 'rotateY(0) rotateX(0)');
+
+      /* ---------- 3D tilt: karty ---------- */
+      document.querySelectorAll('.tilt').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left)/r.width - .5;
+          const y = (e.clientY - r.top)/r.height - .5;
+          card.style.transform = `rotateY(${x*8}deg) rotateX(${-y*8}deg) translateY(-6px)`;
+        });
+        card.addEventListener('mouseleave', () => card.style.transform = '');
+      });
+    }
+
+    /* ---------- Particle network pozadí ---------- */
+    (function(){
+      const canvas = document.getElementById('bg');
+      const ctx = canvas.getContext('2d');
+      let w, h, dpr, parts, mouse = {x:-9999, y:-9999};
+      const COUNT = window.innerWidth < 768 ? 38 : 78;
+      const MAXD = window.innerWidth < 768 ? 120 : 150;
+
+      function resize(){
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = canvas.width = window.innerWidth * dpr;
+        h = canvas.height = window.innerHeight * dpr;
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+      }
+      function init(){
+        parts = [];
+        for (let i=0;i<COUNT;i++){
+          parts.push({
+            x: Math.random()*w, y: Math.random()*h,
+            vx: (Math.random()-.5)*0.35*dpr, vy: (Math.random()-.5)*0.35*dpr,
+            hue: Math.random() < .5 ? '54,168,255' : '154,107,255'
+          });
+        }
+      }
+      function frame(){
+        ctx.clearRect(0,0,w,h);
+        const maxd = MAXD*dpr;
+        for (const p of parts){
+          p.x += p.vx; p.y += p.vy;
+          if (p.x<0||p.x>w) p.vx*=-1;
+          if (p.y<0||p.y>h) p.vy*=-1;
+        }
+        // spoje
+        for (let i=0;i<parts.length;i++){
+          for (let j=i+1;j<parts.length;j++){
+            const a=parts[i], b=parts[j];
+            const dx=a.x-b.x, dy=a.y-b.y;
+            const d=Math.hypot(dx,dy);
+            if (d<maxd){
+              const o=(1-d/maxd)*0.4;
+              ctx.strokeStyle=`rgba(120,160,255,${o})`;
+              ctx.lineWidth=dpr;
+              ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+            }
+          }
+          // spojení k myši
+          const a=parts[i];
+          const mdx=a.x-mouse.x, mdy=a.y-mouse.y, md=Math.hypot(mdx,mdy);
+          if (md<maxd*1.4){
+            const o=(1-md/(maxd*1.4))*0.55;
+            ctx.strokeStyle=`rgba(103,240,255,${o})`;
+            ctx.lineWidth=dpr;
+            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(mouse.x,mouse.y); ctx.stroke();
+          }
+        }
+        // uzly
+        for (const p of parts){
+          ctx.beginPath();
+          ctx.fillStyle=`rgba(${p.hue},.9)`;
+          ctx.shadowBlur=8*dpr; ctx.shadowColor=`rgba(${p.hue},.8)`;
+          ctx.arc(p.x,p.y,1.6*dpr,0,Math.PI*2); ctx.fill();
+          ctx.shadowBlur=0;
+        }
+        raf = requestAnimationFrame(frame);
+      }
+
+      let raf;
+      window.addEventListener('mousemove', e => { mouse.x=e.clientX*dpr; mouse.y=e.clientY*dpr; });
+      window.addEventListener('mouseout', () => { mouse.x=-9999; mouse.y=-9999; });
+      window.addEventListener('resize', () => { resize(); init(); });
+
+      resize(); init();
+      if (reduce){ frame(); cancelAnimationFrame(raf); } // jeden statický snímek
+      else frame();
+    })();
+  </script>
 </body>
 </html>
