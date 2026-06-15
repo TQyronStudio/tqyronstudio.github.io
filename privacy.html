@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — SelfRise · T-Qyron Studio</title>
+  <meta name="description" content="Privacy Policy for the SelfRise mobile app by T-Qyron Studio. How SelfRise handles your data, advertising, analytics, your rights under GDPR, CCPA/CPRA and more." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#04050d" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 30 16 16 30 2 16Z' fill='%2336a8ff'/%3E%3Cpath d='M16 6 26 16 16 26 6 16Z' fill='%239a6bff'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --bg-0:#04050d; --bg-1:#080a1a;
+      --ink:#eef1ff; --body:#c4ccec; --muted:#97a2cf;
+      --blue:#36a8ff; --cyan:#67f0ff; --violet:#9a6bff;
+      --line:rgba(120,150,255,.14); --card:rgba(16,20,44,.5); --card-bd:rgba(130,160,255,.16);
+      --sans:'Space Grotesk',system-ui,sans-serif;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Inter',system-ui,sans-serif;color:var(--body);line-height:1.75;
+      background:
+        radial-gradient(1200px 700px at 50% -15%, #161434 0%, transparent 60%),
+        radial-gradient(900px 600px at 95% 4%, #0b2049 0%, transparent 55%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-0) 70%);
+      background-attachment:fixed;min-height:100vh;-webkit-font-smoothing:antialiased;
+    }
+    a{color:var(--cyan);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;
+      padding:16px clamp(18px,5vw,40px);background:rgba(5,7,18,.72);backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line)}
+    .brand{font-family:var(--sans);font-weight:700;letter-spacing:2px;font-size:.95rem;color:#fff;
+      display:flex;align-items:center;gap:10px}
+    .brand .dot{width:11px;height:11px;border-radius:3px;transform:rotate(45deg);
+      background:linear-gradient(135deg,var(--blue),var(--violet));box-shadow:0 0 18px rgba(54,168,255,.5)}
+    .brand b{background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .back{font-family:var(--sans);font-weight:500;font-size:.92rem;color:var(--muted)}
+    .back:hover{color:var(--cyan);text-decoration:none}
+
+    .wrap{max-width:860px;margin:0 auto;padding:clamp(36px,6vw,70px) clamp(20px,5vw,28px) 80px}
+
+    h1{font-family:var(--sans);font-weight:700;color:#fff;font-size:clamp(2rem,5vw,2.8rem);letter-spacing:-.01em;line-height:1.1}
+    .lede{color:var(--muted);margin-top:14px;font-size:1.05rem}
+    .meta{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+    .meta span{font-family:var(--sans);font-size:.82rem;color:#cdd6ff;background:rgba(120,150,255,.1);
+      border:1px solid var(--line);padding:6px 13px;border-radius:30px}
+
+    .callout{margin:30px 0;padding:22px 24px;border-radius:16px;background:var(--card);border:1px solid var(--card-bd);backdrop-filter:blur(8px)}
+    .callout h2{border:0;margin:0 0 8px;padding:0;font-size:1.15rem}
+    .callout p{margin:8px 0 0}
+
+    nav.toc{margin:34px 0 10px;padding:24px 26px;border-radius:16px;background:rgba(12,15,32,.5);border:1px solid var(--line)}
+    nav.toc h2{border:0;margin:0 0 14px;padding:0;font-size:1rem;color:var(--cyan);letter-spacing:1px;text-transform:uppercase}
+    nav.toc ol{margin:0;padding-left:20px;columns:2;column-gap:34px}
+    nav.toc li{margin:6px 0;font-size:.95rem}
+    @media(max-width:620px){nav.toc ol{columns:1}}
+
+    h2{font-family:var(--sans);font-weight:600;color:#fff;font-size:clamp(1.3rem,3vw,1.6rem);
+      margin:54px 0 16px;padding-top:16px;border-top:1px solid var(--line);scroll-margin-top:80px}
+    h3{font-family:var(--sans);font-weight:600;color:#e7ecff;font-size:1.1rem;margin:28px 0 10px}
+    p{margin:14px 0}
+    ul,ol.list{margin:14px 0;padding-left:24px}
+    li{margin:8px 0}
+    strong{color:#e7ecff;font-weight:600}
+    .small{font-size:.9rem;color:var(--muted)}
+
+    table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.95rem}
+    th,td{text-align:left;padding:12px 14px;border:1px solid var(--line);vertical-align:top}
+    th{background:rgba(120,150,255,.08);color:#e7ecff;font-family:var(--sans);font-weight:600}
+
+    footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--muted);font-size:.9rem}
+    footer a{margin:0 10px}
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a href="index.html" class="brand"><span class="dot"></span>T<b>-QYRON</b> STUDIO</a>
+    <a href="index.html" class="back">← Back to home</a>
+  </div>
+
+  <main class="wrap">
+    <h1>Privacy Policy</h1>
+    <p class="lede">How the <strong>SelfRise</strong> mobile application handles your information.</p>
+    <div class="meta">
+      <span>Application: SelfRise</span>
+      <span>Effective: 15 June 2026</span>
+      <span>Last updated: 15 June 2026</span>
+    </div>
+
+    <div class="callout">
+      <h2>The short version</h2>
+      <p>SelfRise keeps the things you create — your habits, goals, journal entries, progress and gamification data — <strong>on your device only</strong>. We don't run user accounts and we don't upload that content to our servers. The data that <em>is</em> collected comes from third-party tools we use for <strong>advertising</strong> (Google AdMob) and <strong>analytics</strong> (Google Firebase). Where the law requires it, we ask for your consent first, and you can change your choices at any time. This page explains all of it in full.</p>
+    </div>
+
+    <nav class="toc">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#who">Who we are</a></li>
+        <li><a href="#scope">Scope of this policy</a></li>
+        <li><a href="#collect">Information we collect</a></li>
+        <li><a href="#use">How we use information</a></li>
+        <li><a href="#bases">Legal bases (GDPR)</a></li>
+        <li><a href="#ads">Advertising &amp; tracking</a></li>
+        <li><a href="#analytics">Analytics</a></li>
+        <li><a href="#notifications">Notifications</a></li>
+        <li><a href="#permissions">Device permissions</a></li>
+        <li><a href="#sharing">How information is shared</a></li>
+        <li><a href="#transfers">International data transfers</a></li>
+        <li><a href="#retention">Data retention</a></li>
+        <li><a href="#rights-eu">Your rights (EU/EEA/UK – GDPR)</a></li>
+        <li><a href="#rights-us">Your rights (US – California &amp; other states)</a></li>
+        <li><a href="#children">Children's privacy</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#changes">Changes to this policy</a></li>
+        <li><a href="#contact">Contact us</a></li>
+        <li><a href="#services">Third-party services &amp; links</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="who">1. Who we are</h2>
+    <p>SelfRise is developed and operated by <strong>T-Qyron Studio</strong> (Petr Turek), an independent app developer based in the <strong>Czech Republic</strong> (European Union). For the purposes of the EU General Data Protection Regulation (GDPR), T-Qyron Studio is the <strong>data controller</strong> for the limited personal data processed in connection with the app.</p>
+    <p>If you have any questions about this policy or your personal data, you can contact us at <a href="mailto:tqyron.studio@gmail.com">tqyron.studio@gmail.com</a>.</p>
+
+    <h2 id="scope">2. Scope of this policy</h2>
+    <p>This Privacy Policy applies to the <strong>SelfRise</strong> mobile application for iOS and Android (the "App"). It does not apply to third-party services, websites or platforms that the App links to or relies on, each of which is governed by its own privacy policy (see <a href="#services">Third-party services &amp; links</a>).</p>
+
+    <h2 id="collect">3. Information we collect</h2>
+
+    <h3>3.1 Content you create — stored only on your device</h3>
+    <p>SelfRise is built to work locally. The content you create in the App — including your <strong>habits, goals, journal (gratitude) entries, streaks, progress history, settings and gamification data</strong> (XP, levels, achievements, challenges) — is stored <strong>locally on your device</strong> using on-device storage (SQLite / AsyncStorage).</p>
+    <p>We do <strong>not</strong> operate user accounts, we do <strong>not</strong> require you to sign in, and this content is <strong>not</strong> transmitted to or stored on servers operated by us. Because it lives on your device, you remain in direct control of it: you can edit or delete it inside the App, and removing the App from your device deletes this data.</p>
+
+    <h3>3.2 Information collected automatically by third-party tools</h3>
+    <p>To run advertising and understand how the App is used, the App includes software development kits (SDKs) from the providers below. These tools may collect certain information automatically, acting as independent controllers or as our processors, in line with their own privacy policies:</p>
+    <ul>
+      <li><strong>Device &amp; technical information</strong> — device model, operating system and version, language, app version, and similar technical identifiers.</li>
+      <li><strong>Advertising identifiers</strong> — the Apple Advertising Identifier (IDFA) on iOS and the Google Advertising ID (AAID) on Android, where available and permitted.</li>
+      <li><strong>Approximate location</strong> — a coarse, non-precise location (for example, inferred from your IP address) used by advertising and analytics providers. SelfRise itself does not request precise GPS location.</li>
+      <li><strong>Usage &amp; interaction data</strong> — anonymous or pseudonymous events about how the App is used (for example, screens opened or features used) and ad interactions (impressions, clicks).</li>
+      <li><strong>IP address</strong> — processed by these providers as part of delivering ads and analytics.</li>
+    </ul>
+    <p class="small">We do not collect your name, email address, phone number or payment information through the App. The App currently contains no in-app purchases.</p>
+
+    <h2 id="use">4. How we use information</h2>
+    <p>We (and our service providers) use the information described above to:</p>
+    <ul>
+      <li>provide and operate the App and its core features;</li>
+      <li>display advertising, including the option to watch a rewarded ad to restore your journal streak;</li>
+      <li>understand how the App is used so we can improve it (analytics);</li>
+      <li>deliver local reminder notifications you have enabled;</li>
+      <li>protect against fraud, abuse and misuse (for example, invalid ad activity); and</li>
+      <li>comply with legal obligations and enforce our terms.</li>
+    </ul>
+
+    <h2 id="bases">5. Legal bases for processing (GDPR)</h2>
+    <p>If you are in the EU/EEA or the UK, we rely on the following legal bases under the GDPR:</p>
+    <ul>
+      <li><strong>Consent</strong> (Art. 6(1)(a)) — for personalized advertising, advertising/analytics identifiers and tracking that require it. On supported devices we ask for this through Google's User Messaging Platform (UMP) consent form and, on iOS, through Apple's App Tracking Transparency (ATT) prompt. You can withdraw consent at any time (see <a href="#ads">Advertising &amp; tracking</a>).</li>
+      <li><strong>Legitimate interests</strong> (Art. 6(1)(f)) — for non-personalized advertising where permitted, basic analytics, security and keeping the App working reliably. We balance these interests against your rights and freedoms.</li>
+      <li><strong>Legal obligation</strong> (Art. 6(1)(c)) — where we must process data to comply with applicable law.</li>
+    </ul>
+
+    <h2 id="ads">6. Advertising &amp; tracking</h2>
+    <p>SelfRise is supported by advertising provided through <strong>Google AdMob</strong> (banner ads and rewarded ads). Depending on your consent and region, ads may be <strong>personalized</strong> (based on advertising identifiers and inferred interests) or <strong>non-personalized</strong> (based on contextual information only).</p>
+    <ul>
+      <li><strong>EU/EEA/UK (GDPR):</strong> before showing ads, the App displays a consent request via Google's User Messaging Platform (UMP). If you do not consent to personalized ads, the App is configured to fall back to non-personalized ads where possible.</li>
+      <li><strong>iOS App Tracking Transparency (ATT):</strong> on iOS, the App asks for your permission before tracking you across apps and websites for advertising. If you decline, advertising identifiers are not used for cross-app tracking.</li>
+      <li><strong>United States:</strong> where applicable, you can exercise choices under state privacy laws (see <a href="#rights-us">Your rights (US)</a>).</li>
+    </ul>
+    <p>You can change or withdraw your advertising choices at any time:</p>
+    <ul>
+      <li>review the in-app consent options (where shown), or adjust the App's privacy options in your device settings;</li>
+      <li>on <strong>iOS</strong>: Settings → Privacy &amp; Security → Tracking, and Settings → Privacy &amp; Security → Apple Advertising;</li>
+      <li>on <strong>Android</strong>: Settings → Privacy → Ads, where you can reset or delete your advertising ID and opt out of ad personalization;</li>
+      <li>manage Google ad personalization at <a href="https://adssettings.google.com" target="_blank" rel="noopener">adssettings.google.com</a>.</li>
+    </ul>
+    <p class="small">Learn how Google uses data from apps that use its services: <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">policies.google.com/technologies/partner-sites</a>.</p>
+
+    <h2 id="analytics">7. Analytics</h2>
+    <p>We use <strong>Google Firebase Analytics</strong> to understand, in aggregate, how people use the App so that we can improve it. Firebase Analytics may collect device and usage information and identifiers as described in section 3.2. We use this information for product analytics and performance, not to identify you personally.</p>
+    <p>More information is available in the <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy and Security</a> documentation and the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</p>
+
+    <h2 id="notifications">8. Notifications</h2>
+    <p>If you enable them, SelfRise sends <strong>local reminder notifications</strong> (for example, an afternoon check-in and an evening reflection reminder). These notifications are scheduled on your device and are based on analysis of your habit, journal and goal data <strong>that stays on your device</strong>. We do not send your personal content to a server to generate these reminders.</p>
+    <p>Notifications are delivered through the operating system's standard channels (Apple Push Notification service on iOS, Firebase Cloud Messaging on Android). You can turn notifications on or off at any time in the App's settings or in your device's system settings.</p>
+
+    <h2 id="permissions">9. Device permissions</h2>
+    <p>The App may request the following permissions:</p>
+    <ul>
+      <li><strong>Network / internet access</strong> — required to load ads and to send analytics.</li>
+      <li><strong>Notifications</strong> — to deliver the reminders you enable (Android: <span class="small">POST_NOTIFICATIONS, SCHEDULE_EXACT_ALARM</span>).</li>
+      <li><strong>Tracking (iOS ATT)</strong> — to ask whether advertising identifiers may be used for cross-app tracking.</li>
+    </ul>
+    <p>You can grant or revoke these permissions at any time in your device settings.</p>
+
+    <h2 id="sharing">10. How information is shared</h2>
+    <p>We do <strong>not</strong> sell the personal content you create in the App, and that content stays on your device. Information collected by the third-party SDKs described above is shared with, and processed by, those providers in order to deliver advertising and analytics.</p>
+    <p>We may also disclose information where we believe in good faith that it is necessary to: comply with applicable law, regulation, legal process or an enforceable governmental request; enforce our terms; or protect the rights, property or safety of our users, the public or T-Qyron Studio.</p>
+    <p class="small">Note: using advertising and analytics SDKs may be considered a "sale" or "sharing" of personal information under certain US state laws. See <a href="#rights-us">Your rights (US)</a> for how to opt out.</p>
+
+    <h2 id="transfers">11. International data transfers</h2>
+    <p>Our service providers (including Google) may process data in countries outside your own, including the <strong>United States</strong>. Where data is transferred out of the EU/EEA or the UK, those providers rely on legal transfer mechanisms such as the European Commission's <strong>Standard Contractual Clauses</strong> and, where applicable, the EU-US Data Privacy Framework. For details, see each provider's privacy policy listed in section 19.</p>
+
+    <h2 id="retention">12. Data retention</h2>
+    <ul>
+      <li><strong>On-device content</strong> — kept on your device until you delete it in the App or uninstall the App. We have no copy of it.</li>
+      <li><strong>Advertising and analytics data</strong> — retained by the respective providers for the periods set out in their own privacy policies and retention settings. We keep aggregated analytics information only as long as needed for the purposes described in this policy.</li>
+    </ul>
+
+    <h2 id="rights-eu">13. Your rights (EU / EEA / UK — GDPR)</h2>
+    <p>If you are located in the EU/EEA or the UK, you have the following rights regarding your personal data, subject to the conditions in the GDPR:</p>
+    <ul>
+      <li><strong>Access</strong> — to know whether we process your personal data and to obtain a copy;</li>
+      <li><strong>Rectification</strong> — to correct inaccurate or incomplete data;</li>
+      <li><strong>Erasure</strong> ("right to be forgotten");</li>
+      <li><strong>Restriction</strong> — to limit how we process your data;</li>
+      <li><strong>Objection</strong> — to object to processing based on legitimate interests, including profiling for advertising;</li>
+      <li><strong>Portability</strong> — to receive your data in a structured, commonly used, machine-readable format;</li>
+      <li><strong>Withdraw consent</strong> — at any time, without affecting processing already carried out;</li>
+      <li><strong>Lodge a complaint</strong> — with a supervisory authority. In the Czech Republic this is the Office for Personal Data Protection (Úřad pro ochranu osobních údajů, <a href="https://www.uoou.cz" target="_blank" rel="noopener">uoou.cz</a>); you may also contact the authority in your country of residence.</li>
+    </ul>
+    <p>Because the content you create is stored only on your device, you can exercise many of these rights directly — by viewing, editing or deleting your data in the App, or by uninstalling it. For data held by our providers, or to make any other request, contact us at <a href="mailto:tqyron.studio@gmail.com">tqyron.studio@gmail.com</a> and we will respond within the timeframes required by law.</p>
+
+    <h2 id="rights-us">14. Your rights (United States — California &amp; other states)</h2>
+    <p>If you are a resident of California or another US state with a comprehensive privacy law (such as Virginia, Colorado, Connecticut, Utah, Texas and others), you may have rights including the right to <strong>know/access</strong>, <strong>delete</strong>, <strong>correct</strong>, and to <strong>opt out of the "sale" or "sharing" of personal information</strong> and of <strong>targeted (cross-context behavioral) advertising</strong>. You also have the right not to receive discriminatory treatment for exercising these rights.</p>
+    <h3>California (CCPA/CPRA)</h3>
+    <p>In the past 12 months, the App's third-party SDKs may collect the categories of personal information described in section 3.2 (identifiers such as advertising IDs and IP address, device/internet activity information, and coarse geolocation). This information is collected automatically from your device and used for advertising and analytics as described above.</p>
+    <p>We do <strong>not</strong> sell your personal information for money. However, the use of advertising and analytics partners may constitute "<strong>sharing</strong>" or a "<strong>sale</strong>" of personal information under California law because identifiers may be used for cross-context behavioral advertising. We do not knowingly sell or share the personal information of consumers under 16 years of age.</p>
+    <h3>How to opt out</h3>
+    <ul>
+      <li>Decline tracking in the iOS App Tracking Transparency prompt, or disable ad personalization in your device settings (see section 6).</li>
+      <li>Decline or change your consent in the in-app consent options where shown.</li>
+      <li>Reset or delete your advertising ID on your device.</li>
+    </ul>
+    <p>To make a rights request (or to use an authorized agent), contact us at <a href="mailto:tqyron.studio@gmail.com">tqyron.studio@gmail.com</a>. We will verify your request as required by law and will not discriminate against you for exercising your rights.</p>
+
+    <h2 id="children">15. Children's privacy</h2>
+    <p>SelfRise is intended for a general adult audience and is <strong>not directed to children</strong>. We do not knowingly collect personal information from children under 13 (or under the minimum age required in your jurisdiction — for example, 16 in parts of the EU). If you believe a child has provided personal information to us, please contact us at <a href="mailto:tqyron.studio@gmail.com">tqyron.studio@gmail.com</a> and we will take appropriate steps to address it.</p>
+
+    <h2 id="security">16. Security</h2>
+    <p>We take reasonable technical and organizational measures to protect information. Because your created content is stored locally on your device, its security also depends on the security of your device (for example, your screen lock and operating-system protections). No method of transmission or storage is completely secure, and we cannot guarantee absolute security.</p>
+
+    <h2 id="changes">17. Changes to this policy</h2>
+    <p>We may update this Privacy Policy from time to time — for example, if we add new features or services, or to reflect legal changes. When we do, we will revise the "Last updated" date at the top of this page and, where appropriate, provide additional notice. Your continued use of the App after an update means you accept the revised policy.</p>
+
+    <h2 id="contact">18. Contact us</h2>
+    <p>If you have questions, requests or concerns about this Privacy Policy or your personal data, contact:</p>
+    <p><strong>T-Qyron Studio</strong> (Petr Turek)<br />
+    Czech Republic (EU)<br />
+    Email: <a href="mailto:tqyron.studio@gmail.com">tqyron.studio@gmail.com</a></p>
+
+    <h2 id="services">19. Third-party services &amp; links</h2>
+    <p>The following providers may process data in connection with the App. Please review their privacy policies for full details:</p>
+    <table>
+      <tr><th>Service</th><th>Purpose</th><th>Privacy policy</th></tr>
+      <tr><td>Google AdMob</td><td>Advertising</td><td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></td></tr>
+      <tr><td>Google Firebase Analytics</td><td>Analytics</td><td><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">firebase.google.com/support/privacy</a></td></tr>
+      <tr><td>Apple (App Store, ATT, APNs)</td><td>Distribution &amp; OS services</td><td><a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">apple.com/legal/privacy</a></td></tr>
+      <tr><td>Google (Play, Android, FCM)</td><td>Distribution &amp; OS services</td><td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></td></tr>
+    </table>
+  </main>
+
+  <footer>
+    <div>© <span id="year"></span> T-Qyron Studio</div>
+    <div style="margin-top:10px">
+      <a href="index.html">Home</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="mailto:tqyron.studio@gmail.com">Contact</a>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
