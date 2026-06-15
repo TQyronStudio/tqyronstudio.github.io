@@ -49,6 +49,7 @@
 
     /* ---- vrstvy pozadí: 3D plátno, mřížka-horizont, vignette ---- */
     #bg{position:fixed;inset:0;z-index:-3;pointer-events:none;display:block}
+    #fx{position:fixed;inset:0;z-index:-1;pointer-events:none;display:block}
     .grid-floor{
       position:fixed;left:50%;bottom:-14vh;z-index:-2;
       width:280vw;height:120vh;transform:translateX(-50%) rotateX(78deg);
@@ -216,6 +217,7 @@
   <canvas id="bg"></canvas>
   <div class="grid-floor"></div>
   <div class="vignette"></div>
+  <canvas id="fx"></canvas>
 
   <nav id="nav">
     <a href="#top" class="brand"><span class="dot"></span>T<b>-QYRON</b> STUDIO</a>
@@ -322,6 +324,7 @@
       mouse.y = (e.clientY / window.innerHeight) - .5;
       mouse.px = e.clientX; mouse.py = e.clientY;
     });
+    window.addEventListener('mouseout', (e) => { if (!e.relatedTarget){ mouse.px = -2000; mouse.py = -2000; } });
 
     // karty: 3D náklon na myš
     if (!reduce){
@@ -448,6 +451,24 @@
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       renderer.setSize(window.innerWidth, window.innerHeight);
 
+      // 2D overlay pro interakci s myší (propojování částic ke kurzoru)
+      const fx = document.getElementById('fx');
+      const ctx2 = fx.getContext('2d');
+      let FW, FH, FDPR;
+      function sizeFx(){
+        FDPR = Math.min(window.devicePixelRatio || 1, 2);
+        FW = fx.width  = window.innerWidth * FDPR;
+        FH = fx.height = window.innerHeight * FDPR;
+        fx.style.width  = window.innerWidth + 'px';
+        fx.style.height = window.innerHeight + 'px';
+      }
+      sizeFx();
+      const LINKR = isMobile ? 120 : 165;
+      const interactIdx = [];
+      { const stride = Math.max(1, Math.floor(COUNT / (isMobile ? 260 : 560)));
+        for (let i=0;i<COUNT;i+=stride) interactIdx.push(i); }
+      const vW = new THREE.Vector3(), vC = new THREE.Vector3();
+
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(55, window.innerWidth/window.innerHeight, 0.1, 100);
       camera.position.set(0, 0, 16);
@@ -526,6 +547,7 @@
         camera.aspect = window.innerWidth/window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
+        sizeFx();
       }
       window.addEventListener('resize', resize);
 
@@ -541,6 +563,43 @@
         camera.lookAt(0,0,0);
         lmat.opacity = 0.10 + Math.sin(t*0.6)*0.06;
         renderer.render(scene, camera);
+
+        // ---- interakce s myší: propojení částic ke kurzoru ----
+        ctx2.clearRect(0, 0, FW, FH);
+        if (mouse.px > -1000){
+          const mxp = mouse.px*FDPR, myp = mouse.py*FDPR, Rr = LINKR*FDPR;
+          const near = [];
+          for (let k=0;k<interactIdx.length;k++){
+            const idx = interactIdx[k];
+            vW.set(positions[idx*3], positions[idx*3+1], positions[idx*3+2]).applyMatrix4(group.matrixWorld);
+            vC.copy(vW).applyMatrix4(camera.matrixWorldInverse);
+            if (vC.z > -2) continue;            // za kamerou / příliš blízko
+            vW.project(camera);
+            const sx = (vW.x*0.5+0.5)*FW, sy = (-vW.y*0.5+0.5)*FH;
+            const dx = sx-mxp, dy = sy-myp, d = Math.hypot(dx, dy);
+            if (d < Rr) near.push([sx, sy, d]);
+          }
+          for (let a=0;a<near.length;a++){
+            const o = 1 - near[a][2]/Rr;
+            ctx2.strokeStyle = 'rgba(103,240,255,'+(o*0.5)+')';
+            ctx2.lineWidth = FDPR;
+            ctx2.beginPath(); ctx2.moveTo(mxp, myp); ctx2.lineTo(near[a][0], near[a][1]); ctx2.stroke();
+          }
+          for (let a=0;a<near.length;a++) for (let b=a+1;b<near.length;b++){
+            const ax=near[a][0]-near[b][0], ay=near[a][1]-near[b][1], dd=Math.hypot(ax, ay);
+            if (dd < Rr*0.55){
+              const o = 1 - dd/(Rr*0.55);
+              ctx2.strokeStyle = 'rgba(130,165,255,'+(o*0.22)+')';
+              ctx2.lineWidth = FDPR;
+              ctx2.beginPath(); ctx2.moveTo(near[a][0], near[a][1]); ctx2.lineTo(near[b][0], near[b][1]); ctx2.stroke();
+            }
+          }
+          ctx2.beginPath();
+          ctx2.fillStyle = 'rgba(103,240,255,.85)';
+          ctx2.shadowBlur = 10*FDPR; ctx2.shadowColor = 'rgba(103,240,255,.9)';
+          ctx2.arc(mxp, myp, 2.2*FDPR, 0, Math.PI*2); ctx2.fill();
+          ctx2.shadowBlur = 0;
+        }
       }
 
       let raf;
