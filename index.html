@@ -100,7 +100,7 @@
     .scene::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
       width:120%;height:185%;z-index:-1;pointer-events:none;
       background:radial-gradient(ellipse at center, rgba(70,120,255,.22), transparent 60%)}
-    .logo-mark{display:inline-flex;flex-direction:column;align-items:center;gap:14px;margin:0;
+    .logo-mark{display:inline-flex;flex-direction:column;align-items:center;gap:14px;margin:0;position:relative;
       transform-style:preserve-3d;will-change:transform,opacity;user-select:none}
     .lm-top{font-family:'Orbitron',sans-serif;font-weight:900;line-height:.95;letter-spacing:.03em;
       font-size:clamp(2.7rem,11vw,7.4rem);
@@ -117,6 +117,17 @@
       font-size:clamp(.85rem,3.4vw,1.7rem);
       letter-spacing:clamp(.45em,2vw,1.1em);padding-left:clamp(.45em,2vw,1.1em);
       text-shadow:0 0 14px rgba(103,240,255,.5)}
+    /* kinetická písmena (Quantum Console) */
+    .lm-top,.lm-sub{transform-style:preserve-3d}
+    .lm-top .ch,.lm-sub .ch{display:inline-block;transform-style:preserve-3d;will-change:transform;backface-visibility:hidden}
+    .lm-top .ch{background:linear-gradient(180deg,#ffffff 0%,#cfe6ff 42%,#86b8ff 68%,#9a6bff 100%);
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+    .lm-top .ch.dash{background:none;-webkit-text-fill-color:var(--cyan);color:var(--cyan);
+      filter:drop-shadow(0 0 14px rgba(103,240,255,.85))}
+    .sheen{position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;
+      background:linear-gradient(105deg,transparent 43%,rgba(255,255,255,.7) 50%,transparent 57%);
+      background-size:260% 100%;background-position:200% 0;animation:sweep 5.5s ease-in-out infinite}
+    @keyframes sweep{0%{background-position:150% 0}60%,100%{background-position:-50% 0}}
     .hero .tagline{font-family:var(--sans);font-weight:600;line-height:1.3;max-width:20ch;margin:4px auto 0;
       font-size:clamp(1.15rem,3vw,2rem);
       background:linear-gradient(180deg,#ffffff,#c2d4ff 65%,#9a6bff);
@@ -217,9 +228,10 @@
     <span class="kicker">Indie mobile app studio</span>
     <div class="scene">
       <h1 class="logo-mark" id="heroVisual">
-        <span class="lm-top">T<i>-</i>QYRON</span>
+        <span class="lm-top" data-text="T-QYRON">T-QYRON</span>
         <span class="lm-line" aria-hidden="true"></span>
-        <span class="lm-sub">STUDIO</span>
+        <span class="lm-sub" data-text="STUDIO">STUDIO</span>
+        <span class="sheen" aria-hidden="true"></span>
       </h1>
     </div>
     <p class="tagline">Building smart &amp; engaging apps that make a difference.</p>
@@ -304,10 +316,11 @@
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const mouse = {x:0, y:0};
+    const mouse = {x:0, y:0, px:-2000, py:-2000};
     window.addEventListener('mousemove', (e) => {
       mouse.x = (e.clientX / window.innerWidth) - .5;
       mouse.y = (e.clientY / window.innerHeight) - .5;
+      mouse.px = e.clientX; mouse.py = e.clientY;
     });
 
     // karty: 3D náklon na myš
@@ -323,7 +336,7 @@
       });
     }
 
-    // ---------- Scroll + myš: živý prostorový pohyb hlavního obsahu ----------
+    // ---------- Scroll + myš: prostorový pohyb + kinetický nápis ----------
     (function(){
       if (reduce) return;
       const hero    = document.querySelector('.hero');
@@ -336,24 +349,77 @@
       const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
       let mx = 0, my = 0;
 
+      // --- rozpad nápisu na písmena ---
+      const split = (node) => {
+        const text = node.dataset.text || node.textContent;
+        node.textContent = '';
+        const arr = [];
+        for (const c of text){
+          const s = document.createElement('span');
+          s.className = 'ch' + (c === '-' ? ' dash' : '');
+          s.textContent = c;
+          node.appendChild(s);
+          arr.push({el:s, final:c, fixed:(c === '-'), cx:0, cy:0, cz:0, rx:0, ry:0});
+        }
+        return arr;
+      };
+      const letters = split(hero.querySelector('.lm-top')).concat(split(hero.querySelector('.lm-sub')));
+      const R = window.innerWidth < 768 ? 130 : 200;
+
+      // --- dekódovací scramble ---
+      const glyphs = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789#%&/<>*';
+      function scramble(){
+        letters.forEach((L, i) => {
+          if (L.fixed) return;
+          const start = performance.now() + i*70, dur = 520;
+          (function step(now){
+            if (now < start){ requestAnimationFrame(step); return; }
+            const t = (now - start)/dur;
+            if (t >= 1){ L.el.textContent = L.final; return; }
+            L.el.textContent = (Math.random() < t*t) ? L.final : glyphs[(Math.random()*glyphs.length)|0];
+            requestAnimationFrame(step);
+          })(performance.now());
+        });
+      }
+      scramble();
+      let heroOut = false;
+      new IntersectionObserver((es) => {
+        es.forEach(e => {
+          if (!e.isIntersecting) heroOut = true;
+          else if (heroOut){ heroOut = false; scramble(); }
+        });
+      }, {threshold:0.6}).observe(hero);
+
       function tick(){
         const vh = window.innerHeight;
-        const p  = clamp(window.scrollY / vh, 0, 1);   // průchod první obrazovkou
-        mx += (mouse.x - mx) * 0.06;                   // plynulé sledování myši
+        const p  = clamp(window.scrollY / vh, 0, 1);
+        mx += (mouse.x - mx) * 0.06;
         my += (mouse.y - my) * 0.06;
 
-        // hlavní logo: náklon myší + ustupování do hloubky při scrollu
         logo.style.transform =
           `rotateX(${ -my*9 + p*16 }deg) rotateY(${ mx*11 }deg) translateY(${ -p*70 }px) scale(${ 1 - p*0.12 })`;
         logo.style.opacity = String(1 - p*0.85);
 
-        // textové vrstvy – různé rychlosti = hloubka
         if (kicker){  kicker.style.transform  = `translateY(${ -p*42 }px)`; kicker.style.opacity  = String(1 - p*1.3); }
         if (tagline){ tagline.style.transform = `translateY(${ -p*58 }px)`; tagline.style.opacity = String(1 - p*1.1); }
         if (sub){     sub.style.transform     = `translateY(${ -p*50 }px)`; sub.style.opacity     = String(1 - p*1.25); }
         if (hint){    hint.style.opacity      = String(1 - p*2.2); }
 
-        // jemná paralaxa nadpisů a ikony
+        // magnetická 3D písmena (silové pole kolem kurzoru)
+        for (const L of letters){
+          const r = L.el.getBoundingClientRect();
+          const dx = (r.left + r.width/2) - mouse.px;
+          const dy = (r.top + r.height/2) - mouse.py;
+          const dist = Math.hypot(dx, dy) || 1;
+          const f = clamp(1 - dist/R, 0, 1);
+          const tx = (dx/dist)*f*16, ty = (dy/dist)*f*16, tz = f*46;
+          const ry = clamp(dx/R, -1, 1)*f*-22, rx = clamp(dy/R, -1, 1)*f*22;
+          L.cx += (tx - L.cx)*0.14; L.cy += (ty - L.cy)*0.14; L.cz += (tz - L.cz)*0.14;
+          L.rx += (rx - L.rx)*0.14; L.ry += (ry - L.ry)*0.14;
+          L.el.style.transform =
+            `translate3d(${L.cx.toFixed(2)}px,${L.cy.toFixed(2)}px,${L.cz.toFixed(2)}px) rotateX(${L.rx.toFixed(2)}deg) rotateY(${L.ry.toFixed(2)}deg)`;
+        }
+
         for (const el of pars){
           const k = parseFloat(el.dataset.par) || 0.05;
           const r = el.getBoundingClientRect();
